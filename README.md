@@ -1,4 +1,12 @@
-# React + Vite
+# Elon Store
+
+The repository contains the React storefront in `frontend/` and the Express API in `backend/`.
+
+## Deployment
+
+For Vercel, set the project **Root Directory** to `frontend`. Use `npm run build` as the build command and `dist` as the output directory. Set `VITE_API_BASE_URL` to the deployed backend URL ending in `/api`.
+
+For Render, set the service **Root Directory** to `backend` and use `npm start` as the start command.
 
 This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
 
