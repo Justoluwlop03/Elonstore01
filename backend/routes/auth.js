@@ -20,7 +20,7 @@ function setSession(res, user) {
   res.cookie("access_token", token, {
     httpOnly: true,
     secure: config.env === "production",
-    sameSite: "lax",
+     sameSite: config.env === "production" ? "none" : "lax",
     maxAge: sessionMaxAge(config.jwtExpire),
     path: "/",
   });
@@ -156,7 +156,7 @@ authRouter.post("/login", async (req, res, next) => {
 });
 
 authRouter.post("/logout", (_, res) => {
-  res.clearCookie("access_token", { httpOnly: true, secure: config.env === "production", sameSite: "lax", path: "/" });
+  res.clearCookie("access_token", { httpOnly: true, secure: config.env === "production", sameSite: config.env === "production" ? "none" : "lax", path: "/" });
   res.status(204).end();
 });
 
