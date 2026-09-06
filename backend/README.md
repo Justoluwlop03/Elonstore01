@@ -5,6 +5,8 @@
 
 The React app should call this API with `credentials: "include"` so its httpOnly session cookie is sent.
 
+For a deployed frontend, set the Vercel environment variable `VITE_API_BASE_URL` to the public backend URL ending in `/api` (for example, `https://your-api.example.com/api`). Also set the backend `CORS_ORIGIN` and `FRONTEND_URL` to the deployed frontend URL, then redeploy the frontend so Vite includes the variable in its build.
+
 ## Main endpoints
 
 - `POST /api/auth/register` — JSON: `name`, `email`, `password`

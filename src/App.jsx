@@ -914,9 +914,13 @@ function App() {
     const clearCart = useCallback(() => setItems([]), []);
     useEffect(() => {
         Promise.allSettled([api("/products"), api("/auth/me"), api("/categories")]).then(([productsResult, userResult, categoriesResult]) => {
-            if (productsResult.status === "fulfilled") setProducts(productsResult.value.products.map(toStoreProduct));
-            if (userResult.status === "fulfilled") setUser(userResult.value.user);
-            if (categoriesResult.status === "fulfilled") setCategories(categoriesResult.value.categories);
+            if (productsResult.status === "fulfilled" && Array.isArray(productsResult.value?.products)) {
+                setProducts(productsResult.value.products.map(toStoreProduct));
+            }
+            if (userResult.status === "fulfilled" && userResult.value?.user) setUser(userResult.value.user);
+            if (categoriesResult.status === "fulfilled" && Array.isArray(categoriesResult.value?.categories)) {
+                setCategories(categoriesResult.value.categories);
+            }
             setIsLoading(false);
         });
     }, []);

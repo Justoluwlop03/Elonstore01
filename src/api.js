@@ -12,6 +12,7 @@ export async function api(path, options = {}) {
   });
   const data = response.status === 204 ? null : await response.json().catch(() => null);
   if (!response.ok) throw new Error(data?.message || "Request failed. Please try again.");
+  if (response.status !== 204 && data === null) throw new Error("The API returned an invalid response.");
   return data;
 }
 
